@@ -34,3 +34,9 @@ django.template.exceptions.TemplateDoesNotExist: quiz_finder/home.html
 ERROR 2025-09-04 15:11:26 basehttp log_message "GET / HTTP/1.1" 500 85263
 ERROR 2025-09-04 15:14:52 log log_response Internal Server Error: /api/generate-quiz/
 ERROR 2025-09-04 15:14:52 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 16:14:04 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 16:14:04 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 16:20:57 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 16:20:57 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 16:54:20 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 16:54:20 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332

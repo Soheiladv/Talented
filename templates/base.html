@@ -1,25 +1,23 @@
-{% load static i18n %}
+{% load static i18n %} 
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}آزمون‌یار تیزهوشان{% endblock %}</title>
+    <link rel="icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon">
+    <!-- CSS های اصلی -->
+    <link href="{% static 'admin/css/bootstrap.rtl.min.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/animate.min.css' %}" rel="stylesheet">
+    <!-- CSS فارسی دیتاپیکر -->
+    <link href="{% static 'admin/css/jalalidatepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/custom.css' %}" rel="stylesheet">
 
-    <!-- Bootstrap 5 (RTL) from CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" integrity="sha384-dpuaG1suU0eT09BZ3IstKDFkhrs-bKKA5QCMR/A7/oV4fLdLUEiBKLbPASbussCM" crossorigin="anonymous">
-
-    <!-- Font Awesome 6 from CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Google Fonts (Vazirmatn for Persian) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- SweetAlert2 for beautiful alerts -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
+    {# Select2 CSS #}
+    <link href="{% static 'admin/css/select2.min.css' %}" rel="stylesheet"/>
+    {# Select2 Bootstrap 5 Theme #}
+    <link rel="stylesheet" href="{% static 'admin/css/select2-bootstrap-5-theme.min.css' %}"/>
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif;
@@ -38,6 +36,58 @@
             font-size: 0.9em;
         }
     </style>
+
+    <!-- استایل‌های سفارشی -->
+    <style>
+        @font-face {
+            font-family: 'Parastoo';
+            src: url('{% static "admin/fonts/Parastoo.ttf" %}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Parastoo', 'Yekan', 'IRANSans', sans-serif;
+        }
+
+        /* استایل برای اعلان‌ها */
+        .notification-list {
+            max-height: 400px;
+            overflow-y: auto;
+            min-width: 300px;
+        }
+
+        .notification-item .dropdown-item {
+            transition: background-color 0.3s ease;
+        }
+
+        .notification-item .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .notification-item.unread .dropdown-item {
+            background-color: #e9f7ff;
+            font-weight: bold;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+        }
+
+        .dropdown-divider {
+            margin: 0.25rem 0;
+        }
+
+        .dropdown-header {
+            font-weight: bold;
+            color: #343a40;
+        }
+    </style>
+
     {% block extra_head %}{% endblock %}
 </head>
 <body>

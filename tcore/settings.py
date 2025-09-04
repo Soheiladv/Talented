@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-9457xaw-%y!tx^de(2!f0*(auzwl^5ot5vgnlq&zosraprvybm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'quiz_finder',
+
 
 ]
 
@@ -107,22 +108,26 @@ TIME_ZONE = 'Asia/Tehran'
 USE_I18N = True
 USE_TZ = True
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+from dotenv import load_dotenv # <-- اضافه کردن این import
+load_dotenv(os.path.join(BASE_DIR, '.env')) # <-- اضافه کردن این خط
+# --- تنظیمات Gemini API Key ---
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY") # <-- خواندن کلید از متغیرهای محیطی
+if not GOOGLE_API_KEY:
+    print("WARNING: GOOGLE_API_KEY is not set in the environment variables or .env file.")
 
+HUGGINGFACE_API_TOKEN=os.getenv("HUGGINGFACE_API_TOKEN") #Soheiladv-AzmonYar
+if not HUGGINGFACE_API_TOKEN:
+    print("WARNING: HUGGINGFACE_API_TOKEN is not set in the environment variables or .env file.")
 
-
-GOOGLE_API_KEY = ""
 
 LOGS_DIR = os.path.join(BASE_DIR, 'logs')
 os.makedirs(LOGS_DIR, exist_ok=True)  # مطمئن می‌شویم که پوشه لاگ حتماً وجود دارد

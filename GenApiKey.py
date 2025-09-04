@@ -1,6 +1,7 @@
 from google import genai
 from google.genai import types
 
+# client = genai.Client(api_key='AIzaSyD8rFjwzW_ki8IxGdMV81zZz4ZrgTB6nZc')
 client = genai.Client()
 
 response = client.models.generate_content(
@@ -11,3 +12,15 @@ response = client.models.generate_content(
     ),
 )
 print(response.text)
+
+
+
+
+from IPython.display import Markdown
+
+model = genai.GenerativeModel('gemini-pro')
+response = model.generate_content("Who is the GOAT in the NBA?")
+
+Markdown(response.text)
+
+

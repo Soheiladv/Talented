@@ -7,6 +7,7 @@ from django.conf import settings
 # **مهم:** API Key خود را به صورت امن در settings.py یا متغیرهای محیطی قرار دهید
 # settings.py -> GOOGLE_API_KEY = "YOUR_API_KEY"
 try:
+    print(settings.GOOGLE_API_KEY)
     genai.configure(api_key=settings.GOOGLE_API_KEY)
     model = genai.GenerativeModel('gemini-1.5-flash')  # یا مدل دیگر
 except Exception as e:

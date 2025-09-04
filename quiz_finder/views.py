@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from .gemini_utils import generate_quiz_from_gemini
+from .huggingface_utils import generate_quiz_from_huggingface
 from .models import GeneratedQuiz
 
 
@@ -34,7 +35,8 @@ def start_gemini_quiz(request):
 
         try:
             # ۱. تولید سوالات از Gemini
-            quiz_data = generate_quiz_from_gemini(subject, topic, difficulty, num_questions)
+            quiz_data = generate_quiz_from_huggingface(subject, topic, difficulty, num_questions)
+            quiz_data = generate_quiz_from_huggingface(subject, topic, difficulty, num_questions)
 
             if not quiz_data:
                 # اگر تولید سوال ناموفق بود
@@ -74,7 +76,7 @@ def take_gemini_quiz(request, quiz_id):
         'quiz': quiz,
         'time_limit_minutes': time_limit_minutes
     }
-    return render(request, 'quiz_finder/take_quiz_gemini.html', context)
+    return render(request, 'quiz_finder/take_quiz.html', context)
 
 
 @login_required
@@ -177,7 +179,8 @@ def generate_quiz_api(request):
             return JsonResponse({'error': 'درس انتخاب نشده است.'}, status=400)
 
         # تولید سوالات از Gemini
-        quiz_data = generate_quiz_from_gemini(subject, topic, difficulty, num_questions)
+        quiz_data = generate_quiz_from_huggingface(subject, topic, difficulty, num_questions)
+        # quiz_data = generate_quiz_from_huggingface(subject, topic, difficulty, num_questions)
 
         if not quiz_data or 'questions' not in quiz_data:
             return JsonResponse({'error': 'خطا در تولید سوالات از سرویس هوش مصنوعی. لطفاً دوباره تلاش کنید.'}, status=500)
