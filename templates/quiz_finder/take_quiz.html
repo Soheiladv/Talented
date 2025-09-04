@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div id="quiz-container" class="card shadow-lg d-none">
+            <div class="card-header d-flex justify-content-between align-items-center bg-light">
+                <h5 id="quiz-title" class="mb-0"></h5>
+                <div id="timer" class="badge bg-primary fs-6">--:--</div>
+            </div>
+            <div class="card-body p-4" id="quiz-body">
+                {# سوالات اینجا با JS اضافه می‌شوند #}
+            </div>
+            <div class="card-footer text-center">
+                <button id="prev-btn" class="btn btn-secondary" disabled>سوال قبلی</button>
+                <button id="next-btn" class="btn btn-primary">سوال بعدی</button>
+                <button id="submit-btn" class="btn btn-success d-none">اتمام آزمون و نمایش نتایج</button>
+            </div>
+        </div>
+
+        <div id="result-container" class="d-none">
+            {# نتایج اینجا با JS اضافه می‌شوند #}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<form id="quiz-form-data" class="d-none">
+    {% csrf_token %}
+    <input type="hidden" name="quiz_data" value="{{ request.POST.quiz_data|escape }}">
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const quizContainer = document.getElementById('quiz-container');
+        const resultContainer = document.getElementById('result-container');
+        const quizBody = document.getElementById('quiz-body');
+        const quizTitle = document.getElementById('quiz-title');
+        const timerEl = document.getElementById('timer');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+
+        let quizData;
+        let questions = [];
+        let userAnswers = [];
+        let currentQuestionIndex = 0;
+        let timerInterval;
+
+        // خواندن داده‌های آزمون از فرم مخفی
+        const quizDataInput = document.querySelector('#quiz-form-data input[name="quiz_data"]');
+        if (quizDataInput && quizDataInput.value) {
+            try {
+                const parsedData = JSON.parse(quizDataInput.value);
+                quizData = parsedData.quiz;
+                questions = quizData.questions;
+                userAnswers = new Array(questions.length).fill(null);
+                quizContainer.classList.remove('d-none');
+                startTimer(parsedData.time_limit_seconds);
+                displayQuestion();
+            } catch (e) {
+                console.error("Error parsing quiz data:", e);
+                resultContainer.innerHTML = '<div class="alert alert-danger">خطا در بارگذاری آزمون.</div>';
+                resultContainer.classList.remove('d-none');
+            }
+        } else {
+             resultContainer.innerHTML = '<div class="alert alert-warning">هیچ آزمونی برای نمایش وجود ندارد. لطفاً از صفحه اصلی شروع کنید.</div>';
+             resultContainer.classList.remove('d-none');
+        }
+
+        function startTimer(duration) {
+            let timer = duration;
+            timerInterval = setInterval(() => {
+                let minutes = parseInt(timer / 60, 10);
+                let seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                timerEl.textContent = minutes + ":" + seconds;
+                if (--timer < 0) {
+                    clearInterval(timerInterval);
+                    Swal.fire({ title: 'زمان تمام شد!', text: 'آزمون شما به طور خودکار ارسال می‌شود.', icon: 'warning' }).then(() => {
+                        submitQuiz();
+                    });
+                }
+            }, 1000);
+        }
+        
+        function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                const isChecked = userAnswers[currentQuestionIndex] === index ? 'checked' : '';
+                optionsHTML += `
+                    <div class="form-check fs-5 my-3">
+                        <input class="form-check-input" type="radio" name="option" id="option${index}" value="${index}" ${isChecked}>
+                        <label class="form-check-label w-100" for="option${index}">
+                            ${option}
+                        </label>
+                    </div>
+                `;
+            });
+
+            quizTitle.textContent = `سوال ${currentQuestionIndex + 1} از ${questions.length}`;
+            quizBody.innerHTML = `
+                <p class="lead">${question.question_text}</p>
+                <div class="options-container">${optionsHTML}</div>
+            `;
+
+            // ذخیره پاسخ کاربر
+            document.querySelectorAll('input[name="option"]').forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    userAnswers[currentQuestionIndex] = parseInt(event.target.value);
+                });
+            });
+            updateButtons();
+        }
+
+        function updateButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            if (currentQuestionIndex === questions.length - 1) {
+                nextBtn.classList.add('d-none');
+                submitBtn.classList.remove('d-none');
+            } else {
+                nextBtn.classList.remove('d-none');
+                submitBtn.classList.add('d-none');
+            }
+        }
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        });
+
+        submitBtn.addEventListener('click', () => {
+            Swal.fire({
+                title: 'اتمام آزمون',
+                text: "آیا از اتمام آزمون و نمایش نتایج مطمئن هستید؟",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'بله، تمام کن!',
+                cancelButtonText: 'نه هنوز'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    submitQuiz();
+                }
+            });
+        });
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            quizContainer.classList.add('d-none');
+            resultContainer.classList.remove('d-none');
+            
+            let correctCount = 0;
+            let wrongCount = 0;
+            let unansweredCount = 0;
+            let resultHTML = '<h2 class="text-center mb-4">کارنامه آزمون</h2>';
+
+            questions.forEach((q, index) => {
+                const userAnswerIndex = userAnswers[index];
+                const correctIndex = q.correct_option_index;
+                let resultStatus = '';
+                let optionsDisplay = '';
+
+                q.options.forEach((opt, optIndex) => {
+                    let classColor = '';
+                    let icon = '';
+                    if (optIndex === correctIndex) {
+                        classColor = 'text-success fw-bold';
+                        icon = '<i class="fas fa-check-circle me-2"></i>'; // پاسخ صحیح
+                    }
+                    if (userAnswerIndex === optIndex && userAnswerIndex !== correctIndex) {
+                        classColor = 'text-danger';
+                        icon = '<i class="fas fa-times-circle me-2"></i>'; // انتخاب غلط کاربر
+                    }
+                    optionsDisplay += `<li class="list-group-item ${classColor}">${icon} ${opt}</li>`;
+                });
+                
+                if (userAnswerIndex === null) {
+                    unansweredCount++;
+                    resultStatus = '<span class="badge bg-secondary">نزده</span>';
+                } else if (userAnswerIndex === correctIndex) {
+                    correctCount++;
+                    resultStatus = '<span class="badge bg-success">صحیح</span>';
+                } else {
+                    wrongCount++;
+                    resultStatus = '<span class="badge bg-danger">غلط</span>';
+                }
+                
+                resultHTML += `
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <strong>سوال ${index + 1}</strong>
+                            ${resultStatus}
+                        </div>
+                        <div class="card-body">
+                            <p>${q.question_text}</p>
+                            <ul class="list-group list-group-flush mb-3">${optionsDisplay}</ul>
+                            <details>
+                                <summary class="text-primary" style="cursor:pointer;">نمایش پاسخ تشریحی</summary>
+                                <div class="mt-2 p-3 bg-light rounded">${q.solution}</div>
+                            </details>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            const totalQuestions = questions.length;
+            const score = ((correctCount * 3) - wrongCount) / (totalQuestions * 3) * 100;
+            
+            const summaryHTML = `
+                <div class="card card-body text-center bg-light mb-4">
+                    <h4>نمره شما: ${score.toFixed(1)}٪</h4>
+                    <p class="mb-0">
+                        <span class="text-success mx-2">صحیح: ${correctCount}</span> | 
+                        <span class="text-danger mx-2">غلط: ${wrongCount}</span> | 
+                        <span class="text-secondary mx-2">نزده: ${unansweredCount}</span>
+                    </p>
+                </div>
+                <div class="text-center mb-4">
+                    <a href="{% url 'home' %}" class="btn btn-primary">آزمون جدید</a>
+                </div>
+            `;
+            resultContainer.innerHTML = summaryHTML + resultHTML;
+        }
+    });
+</script>
+{% endblock %}
