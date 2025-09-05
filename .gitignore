@@ -43,9 +43,9 @@ build/
 dist/
 *.egg-info/
 
-# Model folders
-bolbolzaban/
-distilgpt2/
-gpt-neo-125M/
-phi-1_5/
+# Model folders (heavy)
+distilgpt2
+gpt-neo-125M
+phi-1_5
+bolbolzaban
 gpt2-persian/
