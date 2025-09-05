@@ -1,12 +1,14 @@
 import os
 import subprocess
+from pathlib import Path
 
 # -----------------------------
 # تنظیمات اولیه
 # -----------------------------
-project_root = os.path.dirname(os.path.abspath(__file__))
-gitignore_path = os.path.join(project_root, ".gitignore")
-commit_message = "Auto-update .gitignore and clean repo"
+project_root = Path(__file__).parent.resolve()
+gitignore_path = project_root / ".gitignore"
+version_file = project_root / "VERSION"
+commit_message = "Auto-update .gitignore, clean repo and bump version"
 
 # -----------------------------
 # محتویات gitignore
@@ -77,20 +79,39 @@ subprocess.run(["git", "rm", "-r", "--cached", "."], cwd=project_root)
 print("✅ Removed cached files from Git")
 
 # -----------------------------
+# نسخه‌بندی خودکار Semantic Versioning
+# -----------------------------
+if version_file.exists():
+    with open(version_file, "r") as f:
+        version = f.read().strip()
+else:
+    version = "0.0.0"
+
+# افزایش patch
+major, minor, patch = map(int, version.split("."))
+patch += 1
+new_version = f"{major}.{minor}.{patch}"
+
+with open(version_file, "w") as f:
+    f.write(new_version)
+print(f"✅ Version bumped: {version} -> {new_version}")
+
+# -----------------------------
 # اضافه کردن تغییرات و commit
 # -----------------------------
 subprocess.run(["git", "add", "."], cwd=project_root)
-subprocess.run(["git", "commit", "-m", commit_message], cwd=project_root)
+subprocess.run(["git", "commit", "-m", f"{commit_message} (v{new_version})"], cwd=project_root)
 print("✅ Changes added and committed")
+
+# -----------------------------
+# ساخت tag جدید
+# -----------------------------
+subprocess.run(["git", "tag", "-a", f"v{new_version}", "-m", f"Release v{new_version}"], cwd=project_root)
+print(f"✅ Tag created: v{new_version}")
 
 # -----------------------------
 # (اختیاری) push به remote
 # -----------------------------
 # subprocess.run(["git", "push"], cwd=project_root)
-# print("✅ Pushed to remote")
-
-
-from datetime import datetime
-version = datetime.now().strftime("v%Y.%m.%d-%H%M")
-subprocess.run(["git", "tag", "-a", version, "-m", f"Auto tag {version}"])
-subprocess.run(["git", "push", "--tags"])
+# subprocess.run(["git", "push", "--tags"], cwd=project_root)
+# print("✅ Pushed commits and tags to remote")
