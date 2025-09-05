@@ -1,0 +1,50 @@
+
+# ==== Gitignore for Talented Project ====
+
+# Python
+*.pyc
+__pycache__/
+.venv/
+venv/
+.env
+
+# Logs and outputs
+logs/
+*.log
+outputs/
+*.txt
+
+# Backups
+backups/
+*.sql
+*.rar
+
+# Django
+*.sqlite3
+staticfiles/
+media/
+mediafiles/
+**/migrations/*.pyc
+**/migrations/__pycache__/
+
+# IDE and system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Model folders
+bolbolzaban/
+distilgpt2/
+gpt-neo-125M/
+phi-1_5/

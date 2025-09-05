@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg">
+            <div class="card-header text-center bg-primary text-white">
+                <h4 class="mb-0">{{ title }}</h4>
+            </div>
+            <div class="card-body p-4">
+                <form id="quiz-request-form">
+                    {% csrf_token %}
+                    <div class="mb-3">{{ form.subject.label_tag }}{{ form.subject }}</div>
+                    <div class="mb-3">{{ form.topic.label_tag }}{{ form.topic }}</div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">{{ form.num_questions.label_tag }}{{ form.num_questions }}</div>
+                        <div class="col-md-6 mb-3">{{ form.difficulty.label_tag }}{{ form.difficulty }}</div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            <i class="fas fa-magic me-2"></i>
+                            شروع آزمون تصادفی!
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="redirect-form" action="{% url 'generate_quiz_api' %}" method="POST" class="d-none">
+    {% csrf_token %}
+    <input type="hidden" name="generate_quiz_api" id="quiz-data-input">
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('quiz-request-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const form = this;
+    const button = form.querySelector('button[type="submit"]');
+    const spinner = button.querySelector('.spinner-border');
+
+    button.disabled = true;
+    spinner.classList.remove('d-none');
+
+    const formData = new FormData(form);
+    const csrfToken = formData.get('csrfmiddlewaretoken');
+
+    const payload = {
+        subject: formData.get('subject'),
+        topic: formData.get('topic'),
+        difficulty: formData.get('difficulty'),
+        num_questions: parseInt(formData.get('num_questions'))
+    };
+
+    fetch("{% url 'generate_quiz_api' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            document.getElementById('quiz-data-input').value = JSON.stringify(result);
+            document.getElementById('redirect-form').submit();
+        } else {
+            Swal.fire({icon: 'error', title: 'خطا!', text: result.error});
+            button.disabled = false;
+            spinner.classList.add('d-none');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({icon: 'error', title: 'خطای ارتباط!', text: 'مشکلی در ارتباط با سرور رخ داده است.'});
+        button.disabled = false;
+        spinner.classList.add('d-none');
+    });
+});
+</script>
+{% endblock %}

@@ -40,3 +40,312 @@ ERROR 2025-09-04 16:20:57 log log_response Internal Server Error: /api/generate-
 ERROR 2025-09-04 16:20:57 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
 ERROR 2025-09-04 16:54:20 log log_response Internal Server Error: /api/generate-quiz/
 ERROR 2025-09-04 16:54:20 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:25:20 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:25:20 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:35:48 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:35:48 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:37:24 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:37:24 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:38:58 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:38:58 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:42:49 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:42:49 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:53:50 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:53:50 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:55:33 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:55:33 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:58:53 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:58:53 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 17:59:01 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 17:59:01 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 18:00:06 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:00:06 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 151
+ERROR 2025-09-04 18:00:20 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:00:20 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 151
+ERROR 2025-09-04 18:08:17 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:08:17 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 18:15:09 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:15:09 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 18:16:15 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:16:15 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 18:18:50 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:18:50 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 18:19:46 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:19:46 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 18:38:24 log log_response Internal Server Error: /api/generate-quiz/
+ERROR 2025-09-04 18:38:24 basehttp log_message "POST /api/generate-quiz/ HTTP/1.1" 500 332
+ERROR 2025-09-04 18:45:38 log log_response Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'take_quiz' not found. 'take_quiz' is not a valid view function or pattern name.
+ERROR 2025-09-04 18:45:38 basehttp log_message "GET / HTTP/1.1" 500 159254
+ERROR 2025-09-04 18:46:24 log log_response Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'take_quiz' not found. 'take_quiz' is not a valid view function or pattern name.
+ERROR 2025-09-04 18:46:24 basehttp log_message "GET / HTTP/1.1" 500 159270
+ERROR 2025-09-04 18:46:25 log log_response Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'take_quiz' not found. 'take_quiz' is not a valid view function or pattern name.
+ERROR 2025-09-04 18:46:25 basehttp log_message "GET / HTTP/1.1" 500 159270
+ERROR 2025-09-04 18:46:26 log log_response Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'take_quiz' not found. 'take_quiz' is not a valid view function or pattern name.
+ERROR 2025-09-04 18:46:26 basehttp log_message "GET / HTTP/1.1" 500 159270
+ERROR 2025-09-04 20:06:29 log log_response Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "D:\Design & Source Code\Source Coding\Talented\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'take_quiz' not found. 'take_quiz' is not a valid view function or pattern name.
+ERROR 2025-09-04 20:06:29 basehttp log_message "GET / HTTP/1.1" 500 159538

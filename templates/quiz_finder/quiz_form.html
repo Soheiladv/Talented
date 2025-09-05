@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>تست تولید سوال</title>
+</head>
+<body>
+    <h1>تولید سوال چندگزینه‌ای</h1>
+    <form id="quizForm">
+        <label>موضوع: <input type="text" name="subject" value="ریاضی"></label><br>
+        <label>تاپیک: <input type="text" name="topic" value="جبر"></label><br>
+        <label>سختی:
+            <select name="difficulty">
+                <option value="آسان">آسان</option>
+                <option value="متوسط" selected>متوسط</option>
+                <option value="سخت">سخت</option>
+            </select>
+        </label><br>
+        <label>تعداد سوال: <input type="number" name="num_questions" value="3"></label><br>
+        <button type="submit">تولید سوال</button>
+    </form>
+
+    <h2>خروجی:</h2>
+    <pre id="output"></pre>
+
+    <script>
+        const form = document.getElementById('quizForm');
+        const output = document.getElementById('output');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const payload = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/api/generate-quiz/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            output.textContent = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>

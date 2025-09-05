@@ -10,6 +10,7 @@ from django.utils import timezone
 from .gemini_utils import generate_quiz_from_gemini
 from .huggingface_utils import generate_quiz_from_huggingface
 from .models import GeneratedQuiz
+from .utils import generate_quiz
 
 
 @login_required
@@ -148,14 +149,16 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.middleware.csrf import get_token
 import json
-
+import  logging
+logger = logging.getLogger('myview')
 from .forms import QuizRequestForm
 from .gemini_utils import generate_quiz_from_gemini # فایلی که در پاسخ قبلی ساختیم
 
 class QuizHomeView(FormView):
     template_name = 'quiz_finder/home.html'
     form_class = QuizRequestForm
-    success_url = reverse_lazy('take_quiz') # به این آدرس نمی‌رویم، چون با AJAX کار می‌کنیم
+    # success_url = reverse_lazy('take_quiz') # به این آدرس نمی‌رویم، چون با AJAX کار می‌کنیم
+    success_url = reverse_lazy('generate_quiz_view') # به این آدرس نمی‌رویم، چون با AJAX کار می‌کنیم
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -163,7 +166,7 @@ class QuizHomeView(FormView):
         return context
 
 @require_POST
-def generate_quiz_api(request):
+def generate_quiz_api__(request):
     """
     یک API View که پارامترهای آزمون را با POST می‌گیرد،
     سوالات را از Gemini تولید می‌کند و به صورت JSON برمی‌گرداند.
@@ -209,3 +212,93 @@ class TakeQuizView(TemplateView):
         context['title'] = 'شروع آزمون'
         context['csrf_token'] = get_token(self.request) # برای ارسال در AJAX
         return context
+# ==================
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+import json
+
+@csrf_exempt
+@require_POST
+def generate_quiz_api(request):
+    """
+    API endpoint برای تولید سوالات آزمون
+    """
+    try:
+        # بررسی وجود داده JSON
+        if not request.body:
+            return JsonResponse({"error": "بدنه درخواست خالی است"}, status=400)
+
+        data = json.loads(request.body.decode('utf-8'))
+
+        # اعتبارسنجی فیلدهای ضروری
+        subject = data.get('subject', '').strip()
+        topic = data.get('topic', '').strip()
+
+        if not subject:
+            return JsonResponse({"error": "لطفاً موضوع را انتخاب کنید"}, status=400)
+
+        if not topic:
+            return JsonResponse({"error": "لطفاً مبحث را انتخاب کنید"}, status=400)
+
+        num_questions = int(data.get('num_questions', 5))
+        difficulty = data.get('difficulty', 'متوسط')
+
+        # تولید سوالات
+        quiz_data = generate_quiz_from_huggingface(subject, topic, difficulty, num_questions)
+
+        if not quiz_data or 'questions' not in quiz_data:
+            return JsonResponse({"error": "خطا در تولید سوالات"}, status=500)
+
+        # محاسبه زمان پیشنهادی (1.5 دقیقه برای هر سوال)
+        time_limit = int(num_questions * 90)  # به ثانیه
+
+        return JsonResponse({
+            "success": True,
+            "quiz": quiz_data,
+            "time_limit_seconds": time_limit,
+            "message": f"{len(quiz_data['questions'])} سوال تولید شد"
+        })
+
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "فرمت JSON نامعتبر است"}, status=400)
+
+    except ValueError as e:
+        return JsonResponse({"error": "مقادیر ورودی نامعتبر هستند"}, status=400)
+
+    except Exception as e:
+        logger.error(f"خطای سرور: {str(e)}")
+        return JsonResponse({"error": "خطای داخلی سرور"}, status=500)
+
+
+# ========
+# views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.conf import settings
+
+@csrf_exempt
+def generate_quiz_view(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    try:
+        data = json.loads(request.body)
+        subject = data.get("subject", "عمومی")
+        topic = data.get("topic", "عمومی")
+        difficulty = data.get("difficulty", "متوسط")
+        num_questions = int(data.get("num_questions", 5))
+    except Exception as e:
+        return JsonResponse({"error": f"Invalid request data: {e}"}, status=400)
+
+    # استفاده از توکن از settings
+    hf_token = getattr(settings, "HUGGINGFACE_API_TOKEN", None)
+    quiz_data = generate_quiz(subject, topic, difficulty, num_questions, hf_token=hf_token)
+
+    return JsonResponse({
+        "success": True,
+        "quiz": quiz_data,
+        "time_limit_seconds": num_questions * 90,
+        "message": f"{len(quiz_data.get('questions', []))} سوال تولید شد"
+    })
