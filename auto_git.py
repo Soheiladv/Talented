@@ -63,6 +63,7 @@ bolbolzaban/
 distilgpt2/
 gpt-neo-125M/
 phi-1_5/
+gpt2-persian/
 """
 
 # -----------------------------
